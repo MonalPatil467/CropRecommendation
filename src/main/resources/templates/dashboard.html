@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Crop AI</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h2>🌱 Smart Crop AI</h2>
+
+        <ul>
+            <li><a href="#">🏠 Dashboard</a></li>
+            <li><a href="#">🌾 New Recommendation</a></li>
+            <li><a href="/history">📜 History</a></li>
+            <li><a href="#">👤 Profile</a></li>
+            <li><a href="/login">🚪 Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="welcome-card">
+            <h1>Welcome Back 👋</h1>
+            <p>
+                Get AI-powered crop recommendations based on
+                soil nutrients, temperature, humidity,
+                rainfall, and pH levels.
+            </p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🌾 New Recommendation</h3>
+                <p>Create a new crop prediction.</p>
+                <button onclick="location.href='/recommendation'">
+                    Start
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>📜 History</h3>
+                <p>View previous recommendations.</p>
+                <button onclick="location.href='/history'">
+                    View
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>📊 Accuracy</h3>
+                <p>AI-powered prediction engine.</p>
+                <button>
+                    98%
+                </button>
+            </div>
+
+        </div>
+
+        <div class="info-section">
+
+            <div class="info-card">
+                <h3>🌡 Temperature</h3>
+                <p>Used for crop suitability analysis.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>💧 Humidity</h3>
+                <p>Helps determine crop growth conditions.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>🌧 Rainfall</h3>
+                <p>Important for irrigation planning.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>🧪 Soil Nutrients</h3>
+                <p>N, P, K values influence recommendations.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

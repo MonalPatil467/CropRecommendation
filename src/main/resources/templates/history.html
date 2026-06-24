@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation History</title>
+    <link rel="stylesheet" href="/css/history.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h2>🌱 Smart Crop AI</h2>
+
+        <ul>
+            <li><a href="/dashboard">🏠 Dashboard</a></li>
+            <li><a href="/recommendation">🌾 New Recommendation</a></li>
+            <li><a href="/history">📜 History</a></li>
+            <li><a href="/login">🚪 Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="header-card">
+            <h1>📜 Recommendation History</h1>
+            <p>View all your previous crop recommendations.</p>
+        </div>
+
+        <div class="history-table">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Crop</th>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>pH</th>
+                    <th>Rainfall</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+
+                <tbody id="historyBody">
+
+                <tr>
+                    <td>1</td>
+                    <td>Rice</td>
+                    <td>28°C</td>
+                    <td>85%</td>
+                    <td>6.5</td>
+                    <td>220 mm</td>
+                    <td>31-05-2026</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Maize</td>
+                    <td>25°C</td>
+                    <td>70%</td>
+                    <td>6.0</td>
+                    <td>150 mm</td>
+                    <td>30-05-2026</td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/js/history.js"></script>
+
+</body>
+</html>

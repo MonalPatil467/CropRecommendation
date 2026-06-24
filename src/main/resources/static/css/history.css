@@ -1,0 +1,159 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b,
+            #14532d
+    );
+    color:white;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:260px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border-right:1px solid rgba(255,255,255,0.15);
+    padding:30px 20px;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:40px;
+    color:#4ade80;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    margin-bottom:20px;
+}
+
+.sidebar ul li a{
+    text-decoration:none;
+    color:white;
+    display:block;
+    padding:12px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.sidebar ul li a:hover{
+    background:rgba(74,222,128,0.25);
+    transform:translateX(5px);
+}
+
+/* Main Content */
+
+.main-content{
+    flex:1;
+    padding:30px;
+}
+
+/* Header Card */
+
+.header-card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.header-card h1{
+    color:#4ade80;
+    margin-bottom:10px;
+}
+
+.header-card p{
+    color:#d1d5db;
+}
+
+/* History Table */
+
+.history-table{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:20px;
+    padding:20px;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:rgba(74,222,128,0.15);
+}
+
+th{
+    color:#4ade80;
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+tbody tr{
+    transition:0.3s;
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#4ade80;
+    border-radius:10px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .main-content{
+        padding:15px;
+    }
+
+    table{
+        min-width:700px;
+    }
+}

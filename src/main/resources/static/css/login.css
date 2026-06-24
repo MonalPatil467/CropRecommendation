@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b,
+    #166534
+    );
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+
+    width:420px;
+
+    background:rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.3);
+}
+
+.card h1{
+    color:#4ade80;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:white;
+    margin-bottom:25px;
+}
+
+.card input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    outline:none;
+
+    background:
+    rgba(255,255,255,0.15);
+
+    color:white;
+}
+
+.card input::placeholder{
+    color:#ddd;
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#22c55e;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+
+    background:#16a34a;
+
+    transform:translateY(-2px);
+}
+
+.bottom-text{
+
+    margin-top:20px;
+
+    color:white;
+}
+
+.bottom-text a{
+
+    color:#4ade80;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+#message{
+    margin-top:15px;
+    color:white;
+}
