@@ -10,4 +10,4 @@ public class CropRecommendationApplication {
 		SpringApplication.run(CropRecommendationApplication.class, args);
 	}
 
-}
+     }

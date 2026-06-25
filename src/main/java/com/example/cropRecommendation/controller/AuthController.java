@@ -4,6 +4,7 @@ import com.example.cropRecommendation.DTOs.AuthDTOs.AuthResponseDTO;
 import com.example.cropRecommendation.DTOs.AuthDTOs.LoginRequestDTO;
 import com.example.cropRecommendation.DTOs.AuthDTOs.SignUpRequestDTO;
 import com.example.cropRecommendation.Services.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public AuthResponseDTO signup(
-            @RequestBody SignUpRequestDTO request
+           @Valid @RequestBody SignUpRequestDTO request
     ) {
 
         return authService.signup(request);
@@ -24,7 +25,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthResponseDTO login(
-            @RequestBody LoginRequestDTO request
+           @Valid @RequestBody LoginRequestDTO request
     ) {
 
         return authService.login(request);

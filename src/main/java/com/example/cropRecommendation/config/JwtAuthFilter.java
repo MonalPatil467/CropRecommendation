@@ -1,5 +1,6 @@
 package com.example.cropRecommendation.config;
 
+import org.springframework.security.core.userdetails.User;
 import com.example.cropRecommendation.security.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-async function login(){
+async function login() {
 
     const email =
         document.getElementById("email").value;
@@ -6,27 +6,55 @@ async function login(){
     const password =
         document.getElementById("password").value;
 
-    const response = await fetch(
-        "/api/auth/login",
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                email,
-                password
-            })
+    try {
+
+        const response = await fetch(
+            "/api/auth/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            }
+        );
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            alert(errorText);
+
+            return;
         }
-    );
 
-    const data = await response.json();
+        const data =
+            await response.json();
 
-    localStorage.setItem(
-        "token",
-        data.token
-    );
+        localStorage.setItem(
+            "token",
+            data.token
+        );
 
-    window.location.href =
-        "/dashboard";
+        alert("Login Successful");
+
+        window.location.href =
+            "/dashboard";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Login Failed");
+    }
 }
+
+
+
+
+
+
