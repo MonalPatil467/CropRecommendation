@@ -1,5 +1,6 @@
 package com.example.cropRecommendation.Services;
 
+import com.example.cropRecommendation.Exception.BadRequestException;
 import com.example.cropRecommendation.DTOs.AuthDTOs.AuthResponseDTO;
 import com.example.cropRecommendation.DTOs.AuthDTOs.LoginRequestDTO;
 import com.example.cropRecommendation.DTOs.AuthDTOs.SignUpRequestDTO;
@@ -15,54 +16,51 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final JwtService jwtService;
 
-    public AuthResponseDTO signup(
-            SignUpRequestDTO request
-    ) {
+    public AuthResponseDTO signup(SignUpRequestDTO request) {
+
+        // Name Validation
+        if (request.getName() == null || request.getName().trim().isEmpty()) {
+            throw new BadRequestException("Name is required");
+        }
+
+        // Email Validation
+        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
+            throw new BadRequestException("Email is required");
+        }
 
         if (!request.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            throw new RuntimeException("Invalid Email Format");
+            throw new BadRequestException("Invalid Email Format");
         }
 
-        if (request.getName() == null || request.getName().trim().isEmpty()) {
-            throw new RuntimeException("Name is required");
-        }
-
-        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
-            throw new RuntimeException("Email is required");
+        // Password Validation
+        if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
+            throw new BadRequestException("Password is required");
         }
 
         if (request.getPassword().length() < 6) {
-            throw new RuntimeException("Password must be at least 6 characters");
+            throw new BadRequestException("Password must be at least 6 characters");
         }
 
-        if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
-            throw new RuntimeException("Password is required");
+        // Duplicate Email Check
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new BadRequestException("Email already registered");
         }
 
-        if(userRepository.findByEmail(request.getEmail()).isPresent()){
-            throw new RuntimeException("Email already registered");
-        }
         User user = User.builder()
-                .name(request.getName())
-                .email(request.getEmail())
-                .password(
-                        passwordEncoder.encode(
-                                request.getPassword()
-                        )
-                )
+                .name(request.getName().trim())
+                .email(request.getEmail().trim())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .createdAt(LocalDateTime.now())
                 .build();
 
         userRepository.save(user);
 
-        String token =
-                jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail());
 
         return AuthResponseDTO.builder()
                 .token(token)
@@ -70,45 +68,36 @@ public class AuthService {
                 .build();
     }
 
-    public AuthResponseDTO login(
-            LoginRequestDTO request
-    ) {
+    public AuthResponseDTO login(LoginRequestDTO request) {
+
+        // Email Validation
+        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
+            throw new BadRequestException("Email is required");
+        }
 
         if (!request.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            throw new RuntimeException("Invalid Email Format");
+            throw new BadRequestException("Invalid Email Format");
+        }
+
+        // Password Validation
+        if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
+            throw new BadRequestException("Password is required");
         }
 
         if (request.getPassword().length() < 6) {
-            throw new RuntimeException("Password must be at least 6 characters");
+            throw new BadRequestException("Password must be at least 6 characters");
         }
 
-        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
-            throw new RuntimeException("Email is required");
-        }
-
-        if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
-            throw new RuntimeException("Password is required");
-        }
-
-        User user = userRepository.findByEmail(
-                        request.getEmail()
-                )
+        User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() ->
-                        new RuntimeException("User Not Found")
+                        new BadRequestException("User not found")
                 );
 
-        boolean passwordMatches =
-                passwordEncoder.matches(
-                        request.getPassword(),
-                        user.getPassword()
-                );
-
-        if (!passwordMatches) {
-            throw new RuntimeException("Invalid Password");
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new BadRequestException("Invalid Password");
         }
 
-        String token =
-                jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail());
 
         return AuthResponseDTO.builder()
                 .token(token)
@@ -116,3 +105,4 @@ public class AuthService {
                 .build();
     }
 }
+

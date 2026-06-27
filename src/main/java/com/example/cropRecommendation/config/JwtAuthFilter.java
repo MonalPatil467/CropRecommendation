@@ -29,22 +29,31 @@ public class JwtAuthFilter extends OncePerRequestFilter{
             FilterChain filterChain
     ) throws ServletException, IOException {
 
+        System.out.println("====================================");
+        System.out.println("Request URI: " + request.getRequestURI());
+
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization Header: " + authHeader);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("No JWT token found.");
             filterChain.doFilter(request, response);
             return;
         }
 
         String token = authHeader.substring(7);
+        System.out.println("Token: " + token);
 
         try {
 
             String email = jwtService.extractEmail(token);
+            System.out.println("Extracted Email: " + email);
 
             if (email != null
                     && SecurityContextHolder.getContext().getAuthentication() == null
                     && jwtService.validateToken(token, email)) {
+
+                System.out.println("Token is valid.");
 
                 User user = new User(
                         email,
@@ -66,9 +75,17 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 
                 SecurityContextHolder.getContext()
                         .setAuthentication(authentication);
+
+                System.out.println("Authentication stored in SecurityContext.");
+            } else {
+                System.out.println("Token validation failed.");
             }
 
         } catch (Exception e) {
+
+            System.out.println("JWT Exception:");
+            e.printStackTrace();
+
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Invalid JWT Token");
             return;

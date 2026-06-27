@@ -48,8 +48,12 @@ async function fetchWeather() {
         alert("Failed to fetch weather data");
     }
 }
-
 async function getRecommendation() {
+
+    console.log("getRecommendation called");
+
+    const token = localStorage.getItem("token");
+    console.log("Token:", token);
 
     const soilType =
         document.getElementById("soilType").value;
@@ -78,12 +82,15 @@ async function getRecommendation() {
             </div>
         `;
 
+        console.log("Sending Authorization:", "Bearer " + token);
+
         const response = await fetch(
             "/recommendation",
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
                 },
                 body: JSON.stringify({
                     soilType,
@@ -96,15 +103,13 @@ async function getRecommendation() {
             }
         );
 
-        if (!response.ok) {
+        console.log("Response Status:", response.status);
 
-            throw new Error(
-                "Server Error: " + response.status
-            );
+        if (!response.ok) {
+            throw new Error("Server Error: " + response.status);
         }
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
         console.log("Response:", data);
 
@@ -112,8 +117,7 @@ async function getRecommendation() {
             `<div class="recommendation-card">
                 <h3>🌾 Crop Recommendation</h3>
                 <div class="recommendation-content">
-                    ${(data.recommendation ||
-                        "No recommendation received")
+                    ${(data.recommendation || "No recommendation received")
                         .replace(/\n/g, "<br>")}
                 </div>
             </div>`;
@@ -130,3 +134,4 @@ async function getRecommendation() {
         `;
     }
 }
+
