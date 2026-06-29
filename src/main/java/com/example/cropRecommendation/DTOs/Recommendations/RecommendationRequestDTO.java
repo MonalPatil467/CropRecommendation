@@ -17,4 +17,6 @@ public class RecommendationRequestDTO {
     private String season;
 
     private String language;
+
+    private String irrigation;
 }

@@ -1,98 +1,214 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Crop Recommendation</title>
+
     <link rel="stylesheet" href="/css/recommendation.css">
 </head>
+
 <body>
 
 <div class="container">
 
-    ```
     <div class="card">
 
         <h1>🌱 Smart Crop Recommendation</h1>
-        <p>Get AI-powered crop suggestions based on your farming conditions</p>
+
+        <p>
+            Get AI-powered crop suggestions based on your farming conditions
+        </p>
+
+        <!-- Soil Type -->
 
         <div class="form-group">
+
             <label for="soilType">Soil Type</label>
+
             <select id="soilType">
+
                 <option value="Loamy">Loamy</option>
                 <option value="Clay">Clay</option>
                 <option value="Sandy">Sandy</option>
                 <option value="Black">Black</option>
                 <option value="Red">Red</option>
+
             </select>
+
         </div>
+
+        <!-- City -->
 
         <div class="form-group">
-            <label>City</label>
-            <input type="text" id="city" placeholder="Enter City">
+
+            <label for="city">City</label>
+
+            <input
+                    type="text"
+                    id="city"
+                    placeholder="Enter City"
+            >
+
         </div>
 
-        <button type="button" onclick="fetchWeather()">
-            Fetch Weather
+        <!-- Weather Button -->
+
+        <button
+                type="button"
+                onclick="fetchWeather()">
+
+            🌦 Fetch Weather
+
         </button>
 
+        <!-- Temperature -->
+
         <div class="form-group">
-            <label for="temperature">Temperature (°C)</label>
+
+            <label for="temperature">
+
+                Temperature (°C)
+
+            </label>
+
             <input
                     type="number"
                     id="temperature"
                     placeholder="Enter temperature"
                     required
             >
+
         </div>
 
+        <!-- Humidity -->
+
         <div class="form-group">
-            <label for="humidity">Humidity (%)</label>
+
+            <label for="humidity">
+
+                Humidity (%)
+
+            </label>
+
             <input
                     type="number"
                     id="humidity"
                     placeholder="Enter humidity"
                     required
             >
+
         </div>
 
+        <!-- Rainfall -->
+
         <div class="form-group">
-            <label for="rainfall">Rainfall (mm)</label>
+
+            <label for="rainfall">
+
+                Rainfall
+
+            </label>
+
             <input
-                    type="number"
+                    type="text"
                     id="rainfall"
-                    placeholder="Enter rainfall"
+                    placeholder="Low / Moderate / High"
                     required
             >
+
         </div>
 
         <div class="form-group">
-            <label for="season">Season</label>
+            <label for="irrigation">Irrigation Available</label>
+
+            <select id="irrigation">
+                <option value="Yes">✅ Yes</option>
+                <option value="No">❌ No</option>
+            </select>
+        </div>
+
+        <!-- Season -->
+
+        <div class="form-group">
+
+            <label for="season">
+
+                Season
+
+            </label>
+
             <select id="season">
+
                 <option value="Kharif">Kharif</option>
+
                 <option value="Rabi">Rabi</option>
+
                 <option value="Zaid">Zaid</option>
+
             </select>
+
         </div>
 
+        <!-- Language -->
+
         <div class="form-group">
-            <label for="language">Preferred Language</label>
+
+            <label for="language">
+
+                Preferred Language
+
+            </label>
+
             <select id="language">
-                <option value="English">English</option>
-                <option value="Hindi">Hindi (हिंदी)</option>
-                <option value="Marathi">Marathi (मराठी)</option>
+
+                <option value="English">
+                    English
+                </option>
+
+                <option value="Hindi">
+                    Hindi (हिंदी)
+                </option>
+
+                <option value="Marathi">
+                    Marathi (मराठी)
+                </option>
+
             </select>
+
         </div>
+
+
 
         <button onclick="getRecommendation()">
+
             🌾 Get Recommendation
+
         </button>
+
+
 
         <div id="result"></div>
 
+
+
+        <div
+                id="comparisonContainer"
+                style="display:none;">
+
+            <h2>
+
+                🏆 Top 3 Suitable Crops
+
+            </h2>
+
+            <div id="comparisonCards">
+
+            </div>
+
+        </div>
+
     </div>
-    ```
 
 </div>
 

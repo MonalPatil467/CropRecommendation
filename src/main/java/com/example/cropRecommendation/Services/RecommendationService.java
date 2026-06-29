@@ -10,6 +10,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,7 @@ public class RecommendationService {
                             request.getHumidity(),
                             request.getRainfall(),
                             request.getSeason(),
+                            request.getIrrigation(),
                             request.getLanguage()
                     );
 
@@ -77,5 +79,8 @@ public class RecommendationService {
                             + e.getMessage())
                     .build();
         }
+    }
+    public List<Recommendations> getHistory() {
+        return repository.findAll();
     }
 }
